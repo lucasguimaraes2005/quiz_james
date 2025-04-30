@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Desenvolvimento Web</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .quiz-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .question {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .category {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .options {
+            margin-bottom: 20px;
+        }
+        
+        .option {
+            display: block;
+            padding: 12px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option:hover {
+            background-color: #eee;
+            transform: translateY(-2px);
+        }
+        
+        .option.selected {
+            border-color: #3498db;
+        }
+        
+        .option.correct {
+            background-color: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+        
+        .option.incorrect {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 24px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        button:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            display: none;
+        }
+        
+        .feedback.correct {
+            background-color: #d5f5e3;
+            color: #27ae60;
+        }
+        
+        .feedback.incorrect {
+            background-color: #fadbd8;
+            color: #e74c3c;
+        }
+        
+        .results {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        
+        .results h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 36px;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+        
+        .progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #3498db;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .explanation {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+            text-align: left;
+        }
+        
+        .topic-selector {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .topic-btn {
+            margin: 5px;
+            padding: 10px 15px;
+            background-color: #ecf0f1;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .topic-btn.active {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .quiz-container {
+                padding: 15px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Quiz de Desenvolvimento Web</h1>
+            <p>Teste seus conhecimentos em HTML, CSS, JavaScript e DOM</p>
+        </header>
+        
+        <div class="topic-selector">
+            <button class="topic-btn active" data-topic="all">Todos</button>
+            <button class="topic-btn" data-topic="html">HTML</button>
+            <button class="topic-btn" data-topic="dom">DOM</button>
+            <button class="topic-btn" data-topic="javascript">JavaScript</button>
+            <button class="topic-btn" data-topic="css">CSS</button>
+            <button class="topic-btn" data-topic="objetos">Objetos Nativos</button>
+        </div>
+        
+        <div class="progress">
+            <span id="question-counter">Pergunta 1 de 25</span>
+            <span id="score-counter">Pontuação: 0</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        
+        <div class="quiz-container">
+            <span class="category" id="question-category">HTML</span>
+            <div class="question" id="question-text">Carregando pergunta...</div>
+            <div class="options" id="options-container">
+                <!-- Options will be inserted here by JavaScript -->
+            </div>
+            <div class="feedback" id="feedback"></div>
+            <div class="explanation" id="explanation"></div>
+            <div class="buttons">
+                <button id="check-btn">Verificar Resposta</button>
+                <button id="next-btn" disabled>Próxima Pergunta</button>
+            </div>
+        </div>
+        
+        <div class="results" id="results">
+            <h2>Resultados do Quiz</h2>
+            <div class="score" id="final-score">0/25</div>
+            <p id="result-message">Mensagem baseada no resultado</p>
+            <button id="restart-btn">Reiniciar Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // Array de perguntas do quiz
+        const quizQuestions = [
+            // HTML
+            {
+                category: "html",
+                question: "HTML é uma linguagem de marcação inventada por Tim Berners-Lee e se tornou a principal linguagem de criação de páginas web. Em evolução constante, já teve várias versões e a atual é conhecida como HTML5. Assinale a versão do HTML que não foi lançada oficialmente pela W3C.",
+                options: [
+                    "HTML 2.0",
+                    "HTML 3.0",
+                    "HTML 3.2",
+                    "HTML 4.01",
+                    "HTML5"
+                ],
+                answer: 1,
+                explanation: "A versão HTML 3.0 nunca foi lançada oficialmente pela W3C. Foi uma especificação que não chegou a ser finalizada."
+            },
+            {
+                category: "html",
+                question: "As versões do HTML representam aprimoramentos padronizados na linguagem fundamental da World Wide Web. Com a evolução das versões, mudanças foram sendo lançadas. Assinale a alternativa correta em relação às características de cada versão.",
+                options: [
+                    "O XHTML permite que alguns elementos omitam a tag final",
+                    "O HTML sempre permitiu que o JavaScript fosse executado no navegador",
+                    "HTML não faz distinção entre maiúsculas e minúsculas, enquanto XHTML faz",
+                    "O XHTML é compatível com todos os navegadores",
+                    "O XHTML é mais adequado para dispositivos móveis, como tablets e telefones, enquanto o HTML5 é mais adequado para telas de computador"
+                ],
+                answer: 2,
+                explanation: "O HTML não faz distinção entre maiúsculas e minúsculas nas tags, enquanto o XHTML por ser baseado em XML, faz essa distinção."
+            },
+            {
+                category: "html",
+                question: "O HTML5 é a nova versão da linguagem HTML. São novos elementos (tags) trazidos pelo HTML5:",
+                options: [
+                    "<header>, <article>, <footer>",
+                    "<section>, <aside>, <main>",
+                    "<video>, <audio>, <canvas>",
+                    "<div>, <span>, <p>",
+                    "<nav>, <figure>, <mark>"
+                ],
+                answer: 2,
+                explanation: "O HTML5 trouxe vários novos elementos, sendo <video>, <audio> e <canvas> alguns dos mais importantes para conteúdo multimídia e gráficos."
+            },
+            {
+                category: "html",
+                question: "Há uma tag incluída na especificação do HTML5 que permite a reprodução de arquivos que contenham som ou música. Assinale a opção que apresenta corretamente essa tag.",
+                options: [
+                    "<audio>",
+                    "<phonic>",
+                    "<img>",
+                    "<sound>",
+                    "<music>"
+                ],
+                answer: 0,
+                explanation: "A tag <audio> foi introduzida no HTML5 especificamente para reprodução de arquivos de áudio."
+            },
+            {
+                category: "html",
+                question: "No HTML5 o elemento 'áudio' admite os seguintes atributos: atributos globais, src, controls, crossorigin, preload, autoplay, mediagroup, loop e muted. Selecione a alternativa correta a respeito da função de cada um dos atributos.",
+                options: [
+                    "O atributo controls é destinado a indicar o caminho para o arquivo de som a incorporar na página",
+                    "O atributo mediagroup é destinado a indicar a origem do arquivo de som a incorporar na página",
+                    "O elemento loop é destinado a reproduzir o som",
+                    "O atributo src é destinado a indicar o caminho para o arquivo de som a incorporar na página",
+                    "O atributo autoplay é destinado a indicar como o autor espera que seja o carregamento do som na página"
+                ],
+                answer: 3,
+                explanation: "O atributo src (source) é usado para indicar o caminho/URL do arquivo de áudio a ser incorporado na página."
+            },
+            
+            // DOM
+            {
+                category: "dom",
+                question: "Existem vários métodos de manipulação dos elementos da página Web que podem ser utilizados pelo desenvolvedor para adicionar comportamento aos sistemas ou a páginas Web. Marque a opção referente ao método que obtém um elemento a partir de seu identificador:",
+                options: [
+                    "getElementById()",
+                    "getElementByClassName()",
+                    "getElementByTagName()",
+                    "querySelector()",
+                    "createElement()"
+                ],
+                answer: 0,
+                explanation: "O método getElementById() permite obter um elemento específico do DOM a partir do valor de seu atributo id."
+            },
+            {
+                category: "dom",
+                question: "Se o desenvolvedor precisar mudar a cor de um texto no momento em que o usuário clicar no botão, é possível acessar os elementos da árvore DOM para realizar tal manipulação no nó em questão. Marque a opção que representa a forma de obter o elemento e definir a cor azul ao texto:",
+                options: [
+                    "document.write(blue)",
+                    "document.getElementById('idTituloPagina').style.color = 'blue'",
+                    "document.appendChild(blue)",
+                    "element.setAttribute(blue)",
+                    "element.innerHTML = \"blue\""
+                ],
+                answer: 1,
+                explanation: "Para mudar a cor de um texto, primeiro obtemos o elemento pelo seu ID usando getElementById() e depois alteramos sua propriedade style.color."
+            },
+            {
+                category: "dom",
+                question: "O DOM é uma interface de programação para documentos HTML que fornece uma representação do documento da página Web na forma de árvore. Marque a opção que representa os elementos filhos do nó window:",
+                options: [
+                    "Document, HTML e history",
+                    "Location, history e body",
+                    "Location, document e history",
+                    "HTML, body e header",
+                    "Header, document e history"
+                ],
+                answer: 2,
+                explanation: "No DOM, o objeto window tem como filhos os objetos location (informações sobre URL), document (o documento HTML) e history (histórico de navegação)."
+            },
+            {
+                category: "dom",
+                question: "Criadas as páginas Web com uma estrutura HTML adequada e com estilização, o desenvolvedor pode adicionar filtros de pesquisa para apresentação de dados selecionados, validação de formulários, entre outros comportamentos dinâmicos e interativos. Marque a opção que representa a linguagem de script que permite a manipulação dos elementos do documento da página Web:",
+                options: [
+                    "HTML",
+                    "CSS",
+                    "XML",
+                    "JavaScript",
+                    "SVG"
+                ],
+                answer: 3,
+                explanation: "JavaScript é a linguagem de script que permite manipular elementos do DOM e adicionar comportamentos interativos às páginas web."
+            },
+            {
+                category: "dom",
+                question: "O DOM é a estrutura e o conteúdo de um documento Web, que são representados por dados dos objetos e um documento nas linguagens de marcação HTML e XML na memória do computador, para que sejam apresentados nos navegadores. Marque a opção que representa os dois padrões que podem ser implementados na maioria dos navegadores mais recentes:",
+                options: [
+                    "HTTP e FTP",
+                    "HTTP e SSH",
+                    "W3C e FTP",
+                    "HTTP e WHATWG",
+                    "W3C e WHATWG"
+                ],
+                answer: 4,
+                explanation: "W3C (World Wide Web Consortium) e WHATWG (Web Hypertext Application Technology Working Group) são as duas organizações que definem padrões para o DOM implementados nos navegadores modernos."
+            },
+            
+            // JavaScript
+            {
+                category: "javascript",
+                question: "Podemos dividir uma ação feita com o JavaScript em dois elementos básicos. Quais são?",
+                options: [
+                    "Variável e constante",
+                    "Função e evento",
+                    "Função e variável",
+                    "IF e else",
+                    "Evento e execução"
+                ],
+                answer: 1,
+                explanation: "Uma ação em JavaScript é tipicamente composta por uma função (o código a ser executado) e um evento (o disparador que determina quando o código será executado)."
+            },
+            {
+                category: "javascript",
+                question: "São exemplos de eventos do JavaScript:",
+                options: [
+                    "OnClick, OnCharge e OnLoad",
+                    "OnClick, OnSubmit e OnLoad",
+                    "OnForward, OnSubmit e OnLoad",
+                    "OnClick, OnSubmit e OnRewind",
+                    "OnClick, OnReplay e OnLoad"
+                ],
+                answer: 1,
+                explanation: "OnClick (ao clicar), OnSubmit (ao enviar um formulário) e OnLoad (ao carregar a página) são eventos válidos do JavaScript."
+            },
+            {
+                category: "javascript",
+                question: "São métodos de JavaScript bastante utilizados:",
+                options: [
+                    "OnClick, OnSubmit e OnLoad",
+                    "Alarm(), Confirm() e Play()",
+                    "Alert(), Confirm() e Prompt()",
+                    "if, elseif e else",
+                    "DOM, Canvas e Object"
+                ],
+                answer: 2,
+                explanation: "Alert(), Confirm() e Prompt() são métodos comuns de JavaScript para interagir com o usuário através de caixas de diálogo."
+            },
+            {
+                category: "javascript",
+                question: "Qual a sintaxe correta de um código JavaScript?",
+                options: [
+                    "function myFunction() { document.getElementById('demo').innerHTML = 'Hello!'; }",
+                    "function:myFunction() { document.getElementById('demo').innerHTML = 'Hello!'; }",
+                    "function = myFunction() { document.getElementById('demo').innerHTML = 'Hello!'; }",
+                    "function => myFunction() { document.getElementById('demo').innerHTML = 'Hello!'; }",
+                    "myFunction function() { document.getElementById('demo').innerHTML = 'Hello!'; }"
+                ],
+                answer: 0,
+                explanation: "A sintaxe correta para definir uma função em JavaScript é usando a palavra-chave 'function' seguida pelo nome da função e parâmetros entre parênteses."
+            },
+            {
+                category: "javascript",
+                question: "Qual a função de uma VARIÁVEL no JavaScript?",
+                options: [
+                    "Fazer um teste condicional",
+                    "Ter um valor fixo que não pode ser alterado",
+                    "Ter um valor que varia ou que pode ser inserido pelo usuário",
+                    "Ter um valor nulo",
+                    "Não existem variáveis no JavaScript"
+                ],
+                answer: 2,
+                explanation: "Uma variável em JavaScript tem a função de armazenar dados que podem ser modificados durante a execução do programa ou inseridos pelo usuário."
+            },
+            
+            // CSS
+            {
+                category: "css",
+                question: "Um programador deseja construir um portfólio de fotografias na Internet. Na página principal de seu site, ele desenvolveu um grid com três imagens em cada linha, armazenada em um <div> de propriedade position igual a relative. As imagens foram inseridas com a propriedade float: left, que força imagens a se posicionar à esquerda. Ao todo, 9 imagens foram inseridas na página inicial. Quais propriedades CSS poderiam ser aplicadas às imagens para inserir um espaçamento de 10px entre as imagens?",
+                options: [
+                    "margin-left: 10px; margin-right: 10px;",
+                    "margin-left: 10px; margin-top: 10px;",
+                    "margin-top: 10px; margin-side: 10px;",
+                    "margin: 10px 10px 10px 10px;",
+                    "margin-top: 10px; margin-bottom: 10px;"
+                ],
+                answer: 3,
+                explanation: "A notação curta 'margin: 10px 10px 10px 10px;' aplica margem de 10px em todos os lados (superior, direito, inferior, esquerdo), criando o espaçamento desejado entre as imagens."
+            },
+            {
+                category: "css",
+                question: "O vínculo de arquivos externos CSS permite que grandes websites possam ter o leiaute facilmente editado, sem a necessidade de editar página por página. Qual dos itens a seguir representa uma tag utilizada para vincular arquivos CSS a páginas HTML?",
+                options: [
+                    "<body>",
+                    "<link>",
+                    "<style>",
+                    "style=\"propriedades: valores\"",
+                    "<css>"
+                ],
+                answer: 1,
+                explanation: "A tag <link> é usada para vincular arquivos CSS externos às páginas HTML, normalmente no formato: <link rel=\"stylesheet\" href=\"caminho/do/arquivo.css\">"
+            },
+            {
+                category: "css",
+                question: "Apresentado o seguinte código CSS:\nbody {\n    background-color: black;\n    color: red;\n}\n#div1{\n    background-color: white;\n    color: blue;\n}\n.classe{\n    background-color: green;\n    color: yellow;\n}\nQual seria a cor do texto em uma div com id = 1 e class = classe presente dentro do body de uma página?",
+                options: [
+                    "Vermelho",
+                    "Amarelo",
+                    "Verde",
+                    "Azul",
+                    "Preto"
+                ],
+                answer: 3,
+                explanation: "A cor do texto seria azul porque o seletor #div1 (ID) tem maior especificidade que a classe ou o seletor body, portanto a propriedade color: blue; prevaleceria."
+            },
+            {
+                category: "css",
+                question: "Você deseja construir um site com um menu na cor laranja. Que propriedade poderia ser utilizada para colorir o menu dessa cor? Além disso, qual seria a cor mais apropriada para os textos? Marque a alternativa que contém as propriedades CSS para preencher os requisitos apresentados.",
+                options: [
+                    "background-color: black; color: orange;",
+                    "background-color: orange; color: white;",
+                    "background-color: orange; color: orange;",
+                    "background-color: preto; color: laranja;",
+                    "background-color: orange; color: yellow;"
+                ],
+                answer: 1,
+                explanation: "Para um menu laranja, a cor de texto mais apropriada seria branco (white), pois proporciona bom contraste e legibilidade. As propriedades seriam background-color: orange; color: white;"
+            },
+            {
+                category: "css",
+                question: "Você deseja construir um website, entretanto, ele se comporta de maneira diferente em navegadores distintos. No Chrome, uma margem de 10px é inserida na borda esquerda e superior. No Edge, essa margem não aparece. Qual seletor pode ser utilizado para remover configurações básicas aplicadas por navegadores?",
+                options: [
+                    "*",
+                    "#",
+                    ".",
+                    "all",
+                    "color"
+                ],
+                answer: 0,
+                explanation: "O seletor universal * é usado para selecionar todos os elementos e é frequentemente usado em reset CSS para remover margens e preenchimentos padrão aplicados pelos navegadores."
+            },
+            
+            // Objetos Nativos
+            {
+                category: "objetos",
+                question: "Os objetos nativos estão presentes diretamente na linguagem JS, oferecendo funções e constantes de grande utilidade para o programador. A respeito desses objetos, assinale a alternativa verdadeira:",
+                options: [
+                    "Não apresentam construtores",
+                    "Não podem ser modificados",
+                    "São definidos pelo usuário",
+                    "Servem de base para os demais objetos do código",
+                    "São os mesmos desde a primeira versão do ECMAScript"
+                ],
+                answer: 3,
+                explanation: "Os objetos nativos de JavaScript servem como base para os demais objetos do código, fornecendo funcionalidades fundamentais que podem ser estendidas pelo desenvolvedor."
+            },
+            {
+                category: "objetos",
+                question: "Nem todos os objetos nativos apresentam construtores ou propriedades acessíveis. Qual das alternativas a seguir representa um código válido na manipulação de objetos nativos?",
+                options: [
+                    "new Math(3.14159)",
+                    "Math().PI",
+                    "Date.now",
+                    "new Date(86400)",
+                    "Date.milissenconds = 86400"
+                ],
+                answer: 3,
+                explanation: "O construtor Date aceita um valor numérico que representa milissegundos desde 1º de janeiro de 1970, então 'new Date(86400)' é um código válido para criar um objeto de data."
+            },
+            {
+                category: "objetos",
+                question: "Um aplicativo é utilizado para calcular a quantidade de telhas necessárias para cobrir um telhado a partir dos dados de largura (L) e comprimento (C) da área a ser coberta, o grau de inclinação (I) recomendado para a telha e a quantidade de telhas por m2 (T). Determine qual das opções a seguir resulta na operação da fórmula correta:",
+                options: [
+                    "const quantidade = (Math.sqrt(Mat.pow(C, 2) + Math.pow(I*C, 2))*L)/T",
+                    "const quantidade = (Math.sqrt(C^2 + (I*C)^2)*L)/T",
+                    "const quantidade = Math.div((Math.sqrt(Mat.pow(C, 2) + Math.pow(I.C, 2)).L),T)",
+                    "const quantidade = (Math.sqrt(Mat.pow(2, C) + Math.pow(2, I*C))*L)/T",
+                    "const quantidade = {Math.sqrt[Mat.pow(C, 2) + Math.pow(I*C, 2)]*L}/T"
+                ],
+                answer: 0,
+                explanation: "A fórmula correta utiliza Math.sqrt() para raiz quadrada e Math.pow() para potenciação, calculando a quantidade de telhas através da equação (Math.sqrt(Math.pow(C, 2) + Math.pow(I*C, 2))*L)/T."
+            },
+            {
+                category: "objetos",
+                question: "Um site deve fazer a simulação de um investimento e, para tanto, precisa calcular a quantidade de dias entre as datas de aplicação e resgate. Assinale a alternativa que permite obter, a partir de dois objetos Date, data1 e data2, a quantidade de dias entre eles.",
+                options: [
+                    "data1 - data2",
+                    "data1.Subtract(data2)",
+                    "(data1.getDate() - data2.getDate()).Days",
+                    "(data1.getTime() - data2.getTime())/(24*3600)",
+                    "(data1.getTime() - data2.getTime())/86400000"
+                ],
+                answer: 4,
+                explanation: "A maneira correta de calcular os dias entre duas datas é subtrair os timestamps (em milissegundos) obtidos com getTime() e dividir por 86400000 (quantidade de milissegundos em um dia)."
+            },
+            {
+                category: "objetos",
+                question: "Utilizando a fórmula de juro composto, qual dos algoritmos abaixo consegue extrair os valores necessários do texto a seguir e calcular o valor final de investimento?\n\"Valor inicial de R$ 1.000,00 aplicado a 0,14% de juro ao dia no dia 25/12/2013 e resgatado no dia 13/10/2018\"",
+                options: [
+                    "Algoritmo A (primeiro código apresentado no PDF)",
+                    "Algoritmo B (segundo código apresentado no PDF)",
+                    "Algoritmo C (terceiro código apresentado no PDF)",
+                    "Algoritmo D (quarto código apresentado no PDF)",
+                    "Algoritmo E (quinto código apresentado no PDF)"
+                ],
+                answer: 0,
+                explanation: "O algoritmo A é o único que consegue extrair corretamente os valores e calcular o juro composto. Ele usa expressões regulares para capturar os valores e calcula corretamente o período em dias entre as datas."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedOption = null;
+        let answeredQuestions = 0;
+        let currentQuestions = [...quizQuestions]; 
+        let userAnswers = new Array(quizQuestions.length).fill(null);
+
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const checkBtn = document.getElementById('check-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const feedbackDiv = document.getElementById('feedback');
+        const explanationDiv = document.getElementById('explanation');
+        const questionCounter = document.getElementById('question-counter');
+        const scoreCounter = document.getElementById('score-counter');
+        const progressFill = document.getElementById('progress-fill');
+        const resultsDiv = document.getElementById('results');
+        const finalScore = document.getElementById('final-score');
+        const resultMessage = document.getElementById('result-message');
+        const restartBtn = document.getElementById('restart-btn');
+        const questionCategory = document.getElementById('question-category');
+        const topicBtns = document.querySelectorAll('.topic-btn');
+
+        function initQuiz() {
+            loadQuestion();
+            checkBtn.addEventListener('click', checkAnswer);
+            nextBtn.addEventListener('click', nextQuestion);
+            restartBtn.addEventListener('click', restartQuiz);
+            
+            topicBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    topicBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const topic = btn.dataset.topic;
+                    if (topic === 'all') {
+                        currentQuestions = [...quizQuestions];
+                    } else {
+                        currentQuestions = quizQuestions.filter(q => q.category === topic);
+                    }
+                    restartQuiz();
+                });
+            });
+        }
+
+        function loadQuestion() {
+            const currentQuestion = currentQuestions[currentQuestionIndex];
+            questionText.textContent = currentQuestion.question;
+            questionCategory.textContent = getCategoryName(currentQuestion.category);
+            
+            optionsContainer.innerHTML = '';
+            
+            currentQuestion.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                optionElement.textContent = `${String.fromCharCode(65 + index)}) ${option}`;
+                optionElement.dataset.index = index;
+                
+                optionElement.addEventListener('click', () => {
+                    document.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    optionElement.classList.add('selected');
+                    selectedOption = index;
+                    
+                    checkBtn.disabled = false;
+                });
+                
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            questionCounter.textContent = `Pergunta ${currentQuestionIndex + 1} de ${currentQuestions.length}`;
+            
+            progressFill.style.width = `${((currentQuestionIndex) / currentQuestions.length) * 100}%`;
+            
+            feedbackDiv.style.display = 'none';
+            explanationDiv.style.display = 'none';
+            checkBtn.disabled = false;
+            nextBtn.disabled = true;
+            selectedOption = null;
+        }
+
+        function checkAnswer() {
+            if (selectedOption === null) return;
+            
+            const currentQuestion = currentQuestions[currentQuestionIndex];
+            const options = document.querySelectorAll('.option');
+            
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            checkBtn.disabled = true;
+            
+            const correctOption = options[currentQuestion.answer];
+            correctOption.classList.add('correct');
+            
+            if (selectedOption === currentQuestion.answer) {
+                feedbackDiv.textContent = 'Correto! Muito bem!';
+                feedbackDiv.className = 'feedback correct';
+                score++;
+                userAnswers[currentQuestionIndex] = true;
+            } else {
+                feedbackDiv.textContent = 'Incorreto. A resposta correta está destacada.';
+                feedbackDiv.className = 'feedback incorrect';
+                options[selectedOption].classList.add('incorrect');
+                userAnswers[currentQuestionIndex] = false;
+            }
+            
+            explanationDiv.textContent = currentQuestion.explanation;
+            
+            feedbackDiv.style.display = 'block';
+            explanationDiv.style.display = 'block';
+            
+            nextBtn.disabled = false;
+            
+            scoreCounter.textContent = `Pontuação: ${score}`;
+            
+            answeredQuestions++;
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex >= currentQuestions.length) {
+                showResults();
+                return;
+            }
+            
+            loadQuestion();
+        }
+
+        function showResults() {
+            document.querySelector('.quiz-container').style.display = 'none';
+            resultsDiv.style.display = 'block';
+            
+            finalScore.textContent = `${score}/${currentQuestions.length}`;
+            
+            const percentage = (score / currentQuestions.length) * 100;
+            
+            if (percentage >= 90) {
+                resultMessage.textContent = 'Excelente! Você domina o assunto!';
+            } else if (percentage >= 70) {
+                resultMessage.textContent = 'Muito bom! Você está no caminho certo!';
+            } else if (percentage >= 50) {
+                resultMessage.textContent = 'Bom! Mas ainda há espaço para melhorar.';
+            } else {
+                resultMessage.textContent = 'Continue estudando. A prática leva à perfeição!';
+            }
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            answeredQuestions = 0;
+            userAnswers = new Array(currentQuestions.length).fill(null);
+            
+            document.querySelector('.quiz-container').style.display = 'block';
+            resultsDiv.style.display = 'none';
+            
+            scoreCounter.textContent = 'Pontuação: 0';
+            loadQuestion();
+        }
+
+        function getCategoryName(category) {
+            const categories = {
+                'html': 'HTML',
+                'dom': 'DOM',
+                'javascript': 'JavaScript',
+                'css': 'CSS',
+                'objetos': 'Objetos Nativos'
+            };
+            
+            return categories[category] || category;
+        }
+
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+</body>
+</html>
