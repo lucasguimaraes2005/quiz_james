@@ -239,21 +239,15 @@
 <body>
     <div class="container">
         <header>
-            <h1>Quiz de Desenvolvimento Web</h1>
-            <p>Teste seus conhecimentos em HTML, CSS, JavaScript e DOM</p>
+            <h1>Quiz de Desenvolvimento DART/FLUTTER</h1>
         </header>
         
         <div class="topic-selector">
             <button class="topic-btn active" data-topic="all">Todos</button>
-            <button class="topic-btn" data-topic="html">HTML</button>
-            <button class="topic-btn" data-topic="dom">DOM</button>
-            <button class="topic-btn" data-topic="javascript">JavaScript</button>
-            <button class="topic-btn" data-topic="css">CSS</button>
-            <button class="topic-btn" data-topic="objetos">Objetos Nativos</button>
         </div>
         
         <div class="progress">
-            <span id="question-counter">Pergunta 1 de 25</span>
+            <span id="question-counter">Pergunta 1 de 50</span>
             <span id="score-counter">Pontuação: 0</span>
         </div>
         <div class="progress-bar">
@@ -285,341 +279,607 @@
     <script>
         // Array de perguntas do quiz
         const quizQuestions = [
-    // HTML
     {
-        category: "html",
-        question: "HTML é uma linguagem de marcação inventada por Tim Berners-Lee e se tornou a principal linguagem de criação de páginas web. Em evolução constante, já teve várias versões e a atual é conhecida como HTML5. Assinale a versão do HTML que não foi lançada oficialmente pela W3C.",
+        category: "dart",
+        question: "Qual é o tipo de linguagem de programação do Dart?",
         options: [
-            "HTML 2.0",
-            "HTML 3.0",
-            "HTML 3.2",
-            "HTML 4.01",
-            "HTML5"
-        ],
-        answer: 1,
-        explanation: "A versão HTML 3.0 nunca foi lançada oficialmente pela W3C. Foi uma especificação que não chegou a ser finalizada."
-    },
-    {
-        category: "html",
-        question: "As versões do HTML representam aprimoramentos padronizados na linguagem fundamental da World Wide Web. Com a evolução das versões, mudanças foram sendo lançadas. Assinale a alternativa correta em relação às características de cada versão.",
-        options: [
-            "O XHTML permite que alguns elementos omitam a tag final",
-            "O HTML sempre permitiu que o JavaScript fosse executado no navegador",
-            "HTML não faz distinção entre maiúsculas e minúsculas, enquanto XHTML faz",
-            "O XHTML é compatível com todos os navegadores",
-            "O XHTML é mais adequado para dispositivos móveis, como tablets e telefones, enquanto o HTML5 é mais adequado para telas de computador"
+            "Compilada para bytecode (como Java)",
+            "Interpretada (como Python)",
+            "Compilada para código nativo e JavaScript",
+            "Baseada em máquina virtual (como C#)"
         ],
         answer: 2,
-        explanation: "O HTML não faz distinção entre maiúsculas e minúsculas nas tags, enquanto o XHTML por ser baseado em XML, faz essa distinção."
+        explanation: "Porque o Dart é projetado para ser compilado tanto para código nativo (em apps Flutter) quanto para JavaScript (em apps web)"
     },
     {
-        category: "html",
-        question: "O HTML5 é a nova versão da linguagem HTML. São novos elementos (tags) trazidos pelo HTML5:",
+        category: "dart",
+        question: "Qual palavra-chave é usada para declarar uma variável que não pode ser alterada?",
         options: [
-            "<article>, <aside> e <color>",
-            "<ul>, <p> e <nav>",
-            "<article>, <p> e <nav>",
-            "<color>, <aside> e <nav>",
-            "<article>, <aside> e <nav>"
+            "var",
+            "dynamic",
+            "final ou const",
+            "static"
         ],
-        answer: 4,
-        explanation: "As tags <article>, <aside> e <nav> foram introduzidas no HTML5 como parte da estrutura semântica para definir seções, conteúdos laterais e áreas de navegação."
+        answer: 2,
+        explanation: "As palavras-chave final ou const são usadas para declarar variáveis que não podem ser alteradas em Dart."
     },
     {
-        category: "html",
-        question: "Há uma tag incluída na especificação do HTML5 que permite a reprodução de arquivos que contenham som ou música. Assinale a opção que apresenta corretamente essa tag.",
+        category: "dart",
+        question: "Como se define uma função anônima em Dart?",
         options: [
-            "<audio>",
-            "<phonic>",
-            "<img>",
-            "<sound>",
-            "<music>"
+            "function() {}",
+            "() => {}",
+            "() {} ou () => expr",
+            "lambda: {}"
+        ],
+        answer: 2,
+        explanation: "Em Dart, funções anônimas são definidas usando a sintaxe () {} ou () => expr."
+    },
+    {
+        category: "dart",
+        question: "Qual é a saída do seguinte código?\nvoid main() {\n  int x = 5;\n  print(x ~/ 2);\n}",
+        options: [
+            "2.5",
+            "2",
+            "3",
+            "Erro"
+        ],
+        answer: 1,
+        explanation: "O operador ~/ em Dart realiza a divisão inteira, então 5 ~/ 2 resulta em 2."
+    },
+    {
+        category: "dart",
+        question: "Qual método é usado para converter uma String em int?",
+        options: [
+            "String.toInt()",
+            "int.parse()",
+            "int.fromString()",
+            "String.castToInt()"
+        ],
+        answer: 1,
+        explanation: "Em Dart, o método int.parse() é usado para converter uma String em int."
+    },
+    {
+        category: "dart",
+        question: "O que é Future em Dart?",
+        options: [
+            "Um tipo de lista assíncrona",
+            "Um objeto que representa um valor disponível no futuro",
+            "Um erro em tempo de execução",
+            "Um operador para concatenação"
+        ],
+        answer: 1,
+        explanation: "Future em Dart representa um valor que estará disponível em algum momento no futuro, usado para operações assíncronas."
+    },
+    {
+        category: "dart",
+        question: "Qual é a forma correta de declarar uma lista de inteiros?",
+        options: [
+            "List<int> = [1, 2, 3];",
+            "List<int> list = [1, 2, 3];",
+            "Array<int> list = [1, 2, 3];",
+            "int[] list = [1, 2, 3];"
+        ],
+        answer: 1,
+        explanation: "A forma correta de declarar uma lista de inteiros em Dart é: List<int> list = [1, 2, 3];"
+    },
+    {
+        category: "dart",
+        question: "Como se define um construtor nomeado em Dart?",
+        options: [
+            "class MyClass { constructor.named(); }",
+            "class MyClass { MyClass.named(); }",
+            "class MyClass { new.named(); }",
+            "class MyClass { named(); }"
+        ],
+        answer: 1,
+        explanation: "Em Dart, um construtor nomeado é definido usando a sintaxe 'NomeDaClasse.nomeDoConstructor()'"
+    },
+    {
+        category: "dart",
+        question: "Qual é a saída do código abaixo?\nvoid main() {\n  var list = [1, 2, 3];\n  list.forEach((item) => print(item * 2));\n}",
+        options: [
+            "[2, 4, 6]",
+            "2, 4, 6 (um por linha)",
+            "null",
+            "Erro"
+        ],
+        answer: 1,
+        explanation: "O código imprime os valores multiplicados por 2, um em cada linha, resultando em '2', '4', '6'."
+    },
+    {
+        category: "dart",
+        question: "Qual pacote é usado para fazer requisições HTTP em Dart?",
+        options: [
+            "dart:web",
+            "dart:io",
+            "http (pacote externo)",
+            "dart:net"
+        ],
+        answer: 2,
+        explanation: "O pacote 'http' externo é comumente usado para fazer requisições HTTP em Dart."
+    },
+    {
+        category: "dart",
+        question: "O que async e await fazem?",
+        options: [
+            "Permitem trabalhar com código assíncrono de forma síncrona",
+            "Compilam código mais rápido",
+            "São usados para definir threads",
+            "Convertem JSON automaticamente"
         ],
         answer: 0,
-        explanation: "A tag <audio> foi introduzida no HTML5 especificamente para reprodução de arquivos de áudio."
+        explanation: "async e await permitem escrever código assíncrono de forma que pareça síncrono, facilitando sua leitura e manutenção."
     },
     {
-        category: "html",
-        question: "No HTML5 o elemento 'áudio' admite os seguintes atributos: atributos globais, src, controls, crossorigin, preload, autoplay, mediagroup, loop e muted. Selecione a alternativa correta a respeito da função de cada um dos atributos.",
+        category: "dart",
+        question: "Qual é a função do operador ???",
         options: [
-            "O atributo controls é destinado a indicar o caminho para o arquivo de som a incorporar na página",
-            "O atributo mediagroup é destinado a indicar a origem do arquivo de som a incorporar na página",
-            "O elemento loop é destinado a reproduzir o som",
-            "O atributo src é destinado a indicar o caminho para o arquivo de som a incorporar na página",
-            "O atributo autoplay é destinado a indicar como o autor espera que seja o carregamento do som na página"
-        ],
-        answer: 3,
-        explanation: "O atributo src (source) é usado para indicar o caminho/URL do arquivo de áudio a ser incorporado na página."
-    },
-
-    // DOM
-    {
-        category: "dom",
-        question: "Existem vários métodos de manipulação dos elementos da página Web que podem ser utilizados pelo desenvolvedor para adicionar comportamento aos sistemas ou a páginas Web. Marque a opção referente ao método que obtém um elemento a partir de seu identificador:",
-        options: [
-            "getElementById()",
-            "getElementByClassName()",
-            "getElementByTagName()",
-            "querySelector()",
-            "createElement()"
+            "Retorna o valor à direita se o da esquerda for null",
+            "Verifica igualdade",
+            "Concatena strings",
+            "Faz divisão"
         ],
         answer: 0,
-        explanation: "O método getElementById() permite obter um elemento específico do DOM a partir do valor de seu atributo id."
+        explanation: "O operador ?? (null-coalescing) retorna o valor à direita se o valor à esquerda for null."
     },
     {
-        category: "dom",
-        question: "Se o desenvolvedor precisar mudar a cor de um texto no momento em que o usuário clicar no botão, é possível acessar os elementos da árvore DOM para realizar tal manipulação no nó em questão. Marque a opção que representa a forma de obter o elemento e definir a cor azul ao texto:",
+        category: "dart",
+        question: "Como se define um mapa (dicionário) em Dart?",
         options: [
-            "document.write(blue)",
-            "document.getElementById('idTituloPagina').style.color = 'blue'",
-            "document.appendChild(blue)",
-            "element.setAttribute(blue)",
-            "element.innerHTML = \"blue\""
-        ],
-        answer: 1,
-        explanation: "Para mudar a cor de um texto, primeiro obtemos o elemento pelo seu ID usando getElementById() e depois alteramos sua propriedade style.color."
-    },
-    {
-        category: "dom",
-        question: "O DOM é uma interface de programação para documentos HTML que fornece uma representação do documento da página Web na forma de árvore. Marque a opção que representa os elementos filhos do nó window:",
-        options: [
-            "Document, HTML e history",
-            "Location, history e body",
-            "Location, document e history",
-            "HTML, body e header",
-            "Header, document e history"
-        ],
-        answer: 2,
-        explanation: "No DOM, o objeto window tem como filhos os objetos location (informações sobre URL), document (o documento HTML) e history (histórico de navegação)."
-    },
-    {
-        category: "dom",
-        question: "Criadas as páginas Web com uma estrutura HTML adequada e com estilização, o desenvolvedor pode adicionar filtros de pesquisa para apresentação de dados selecionados, validação de formulários, entre outros comportamentos dinâmicos e interativos. Marque a opção que representa a linguagem de script que permite a manipulação dos elementos do documento da página Web:",
-        options: [
-            "HTML",
-            "CSS",
-            "XML",
-            "JavaScript",
-            "SVG"
-        ],
-        answer: 3,
-        explanation: "JavaScript é a linguagem de script que permite manipular elementos do DOM e adicionar comportamentos interativos às páginas web."
-    },
-    {
-        category: "dom",
-        question: "O DOM é a estrutura e o conteúdo de um documento Web, que são representados por dados dos objetos e um documento nas linguagens de marcação HTML e XML na memória do computador, para que sejam apresentados nos navegadores. Marque a opção que representa os dois padrões que podem ser implementados na maioria dos navegadores mais recentes:",
-        options: [
-            "HTTP e FTP",
-            "HTTP e SSH",
-            "W3C e FTP",
-            "HTTP e WHATWG",
-            "W3C e WHATWG"
-        ],
-        answer: 4,
-        explanation: "W3C (World Wide Web Consortium) e WHATWG (Web Hypertext Application Technology Working Group) são as duas organizações que definem padrões para o DOM implementados nos navegadores modernos."
-    },
-
-    // JavaScript
-    {
-        category: "javascript",
-        question: "Podemos dividir uma ação feita com o JavaScript em dois elementos básicos. Quais são?",
-        options: [
-            "Variável e constante",
-            "Função e evento",
-            "Função e variável",
-            "IF e else",
-            "Evento e execução"
-        ],
-        answer: 1,
-        explanation: "Uma ação em JavaScript é tipicamente composta por uma função (o código a ser executado) e um evento (o disparador que determina quando o código será executado)."
-    },
-    {
-        category: "javascript",
-        question: "São exemplos de eventos do JavaScript:",
-        options: [
-            "OnClick, OnCharge e OnLoad",
-            "OnClick, OnSubmit e OnLoad",
-            "OnForward, OnSubmit e OnLoad",
-            "OnClick, OnSubmit e OnRewind",
-            "OnClick, OnReplay e OnLoad"
-        ],
-        answer: 1,
-        explanation: "OnClick (ao clicar), OnSubmit (ao enviar um formulário) e OnLoad (ao carregar a página) são eventos válidos do JavaScript."
-    },
-    {
-        category: "javascript",
-        question: "São métodos de JavaScript bastante utilizados:",
-        options: [
-            "OnClick, OnSubmit e OnLoad",
-            "Alarm(), Confirm() e Play()",
-            "Alert(), Confirm() e Prompt()",
-            "if, elseif e else",
-            "DOM, Canvas e Object"
-        ],
-        answer: 2,
-        explanation: "Alert(), Confirm() e Prompt() são métodos comuns de JavaScript para interagir com o usuário através de caixas de diálogo."
-    },
-    {
-    category: "javascript",
-    question: "Qual a sintaxe correta de um código JavaScript?",
-    options: [
-        String.fromCharCode(60) + "script type=" + String.fromCharCode(39) + "text/css" + String.fromCharCode(39) + String.fromCharCode(62) + " conteúdo do Script; " + String.fromCharCode(60) + "/script" + String.fromCharCode(62),
-        String.fromCharCode(60) + "script type=" + String.fromCharCode(39) + "text/javascript" + String.fromCharCode(39) + String.fromCharCode(62) + " conteúdo do Script; " + String.fromCharCode(60) + "/script" + String.fromCharCode(62),
-        String.fromCharCode(60) + "Javascript" + String.fromCharCode(62) + " conteúdo do Script; " + String.fromCharCode(60) + "/Javascript" + String.fromCharCode(62),
-        String.fromCharCode(60) + "Java" + String.fromCharCode(62) + " conteúdo do Script; " + String.fromCharCode(60) + "/Java" + String.fromCharCode(62),
-        String.fromCharCode(60) + "script type=" + String.fromCharCode(39) + "java" + String.fromCharCode(39) + String.fromCharCode(62) + " conteúdo do Script; " + String.fromCharCode(60) + "/script" + String.fromCharCode(62)
-    ],
-    answer: 1,
-    explanation: "A sintaxe correta para incluir JavaScript em um documento HTML é usando a tag " + String.fromCharCode(60) + "script" + String.fromCharCode(62) + " com o atributo type='text/javascript' ou simplesmente a tag " + String.fromCharCode(60) + "script" + String.fromCharCode(62) + " sem atributo type, que é o padrão para JavaScript."
-},
-    {
-        category: "javascript",
-        question: "Qual a função de uma VARIÁVEL no JavaScript?",
-        options: [
-            "Fazer um teste condicional",
-            "Ter um valor fixo que não pode ser alterado",
-            "Ter um valor que varia ou que pode ser inserido pelo usuário",
-            "Ter um valor nulo",
-            "Não existem variáveis no JavaScript"
-        ],
-        answer: 2,
-        explanation: "Uma variável em JavaScript tem a função de armazenar dados que podem ser modificados durante a execução do programa ou inseridos pelo usuário."
-    },
-
-    // CSS
-    {
-        category: "css",
-        question: "Um programador deseja construir um portfólio de fotografias na Internet. Na página principal de seu site, ele desenvolveu um grid com três imagens em cada linha, armazenada em um <div> de propriedade position igual a relative. As imagens foram inseridas com a propriedade float: left, que força imagens a se posicionar à esquerda. Ao todo, 9 imagens foram inseridas na página inicial. Quais propriedades CSS poderiam ser aplicadas às imagens para inserir um espaçamento de 10px entre as imagens?",
-        options: [
-            "margin-left: 10px; margin-right: 10px;",
-            "margin-left: 10px; margin-top: 10px;",
-            "margin-top: 10px; margin-side: 10px;",
-            "margin: 10px 10px 10px 10px;",
-            "margin-top: 10px; margin-bottom: 10px;"
-        ],
-        answer: 1,
-        explanation: "Pra mim seria a D, mas no AVA tá a B então é isso"
-    },
-    {
-        category: "css",
-        question: "O vínculo de arquivos externos CSS permite que grandes websites possam ter o leiaute facilmente editado, sem a necessidade de editar página por página. Qual dos itens a seguir representa uma tag utilizada para vincular arquivos CSS a páginas HTML?",
-        options: [
-            "<body>",
-            "<link>",
-            "<style>",
-            "style=\"propriedades: valores\"",
-            "<css>"
-        ],
-        answer: 1,
-        explanation: "A tag <link> é usada para vincular arquivos CSS externos às páginas HTML, normalmente no formato: <link rel=\"stylesheet\" href=\"caminho/do/arquivo.css\">"
-    },
-    {
-        category: "css",
-        question: "Apresentado o seguinte código CSS:\nbody {\n    background-color: black;\n    color: red;\n}\n#div1{\n    background-color: white;\n    color: blue;\n}\n.classe{\n    background-color: green;\n    color: yellow;\n}\nQual seria a cor do texto em uma div com id = 1 e class = classe presente dentro do body de uma página?",
-        options: [
-            "Vermelho",
-            "Amarelo",
-            "Verde",
-            "Azul",
-            "Preto"
-        ],
-        answer: 1,
-        explanation: "A cor do texto seria azul porque o seletor #div1 (ID) tem maior especificidade que a classe ou o seletor body. Porém o enunciado diz que o id da div é 1, e não div1, portanto é amarelo."
-    },
-    {
-        category: "css",
-        question: "Você deseja construir um site com um menu na cor laranja. Que propriedade poderia ser utilizada para colorir o menu dessa cor? Além disso, qual seria a cor mais apropriada para os textos? Marque a alternativa que contém as propriedades CSS para preencher os requisitos apresentados.",
-        options: [
-            "background-color: black; color: orange;",
-            "background-color: orange; color: white;",
-            "background-color: orange; color: orange;",
-            "background-color: preto; color: laranja;",
-            "background-color: orange; color: yellow;"
-        ],
-        answer: 1,
-        explanation: "Para um menu laranja, a cor de texto mais apropriada seria branco (white), pois proporciona bom contraste e legibilidade. As propriedades seriam background-color: orange; color: white;"
-    },
-    {
-        category: "css",
-        question: "Você deseja construir um website, entretanto, ele se comporta de maneira diferente em navegadores distintos. No Chrome, uma margem de 10px é inserida na borda esquerda e superior. No Edge, essa margem não aparece. Qual seletor pode ser utilizado para remover configurações básicas aplicadas por navegadores?",
-        options: [
-            "*",
-            "#",
-            ".",
-            "all",
-            "color"
+            "Map<String, int> = {'key': 1};",
+            "Dict key = {'key': 1};",
+            "HashMap<String, int> = {'key': 1};",
+            "Map({'key': 1});"
         ],
         answer: 0,
-        explanation: "O seletor universal * é usado para selecionar todos os elementos e é frequentemente usado em reset CSS para remover margens e preenchimentos padrão aplicados pelos navegadores."
+        explanation: "Um mapa em Dart é definido usando a sintaxe Map<ChaveType, ValorType> = {chave: valor}."
     },
-    // Objetos Nativos
-{
-    category: "objetos",
-    question: "Os objetos nativos estão presentes diretamente na linguagem JS, oferecendo funções e constantes de grande utilidade para o programador. A respeito desses objetos, assinale a alternativa verdadeira:",
-    options: [
-        "Não apresentam construtores",
-        "Não podem ser modificados",
-        "São definidos pelo usuário",
-        "Servem de base para os demais objetos do código",
-        "São os mesmos desde a primeira versão do ECMAScript"
-    ],
-    answer: 3,
-    explanation: "Os objetos nativos de JavaScript servem como base para os demais objetos do código, fornecendo funcionalidades fundamentais que podem ser estendidas pelo desenvolvedor."
-},
-{
-    category: "objetos",
-    question: "Nem todos os objetos nativos apresentam construtores ou propriedades acessíveis. Qual das alternativas a seguir representa um código válido na manipulação de objetos nativos?",
-    options: [
-        "new Math(3.14159)",
-        "Math().PI",
-        "Date.now",
-        "new Date(86400)",
-        "Date.milissenconds = 86400"
-    ],
-    answer: 3,
-    explanation: "O construtor Date aceita um valor numérico que representa milissegundos desde 1º de janeiro de 1970, então 'new Date(86400)' é um código válido para criar um objeto de data."
-},
-{
-    category: "objetos",
-    question: "Um aplicativo é utilizado para calcular a quantidade de telhas necessárias para cobrir um telhado a partir dos dados de largura (L) e comprimento (C) da área a ser coberta, o grau de inclinação (I) recomendado para a telha e a quantidade de telhas por m2 (T). Determine qual das opções a seguir resulta na operação da fórmula correta:",
-    options: [
-        "const quantidade = (Math.sqrt(Mat.pow(C, 2) + Math.pow(I*C, 2))*L)/T",
-        "const quantidade = (Math.sqrt(C^2 + (I*C)^2)*L)/T",
-        "const quantidade = Math.div((Math.sqrt(Mat.pow(C, 2) + Math.pow(I.C, 2)).L),T)",
-        "const quantidade = (Math.sqrt(Mat.pow(2, C) + Math.pow(2, I*C))*L)/T",
-        "const quantidade = {Math.sqrt[Mat.pow(C, 2) + Math.pow(I*C, 2)]*L}/T"
-    ],
-    answer: 0,
-    explanation: "A fórmula correta utiliza Math.sqrt() para raiz quadrada e Math.pow() para potenciação, calculando a quantidade de telhas através da equação (Math.sqrt(Math.pow(C, 2) + Math.pow(I*C, 2))*L)/T."
-},
-{
-    category: "objetos",
-    question: "Um site deve fazer a simulação de um investimento e, para tanto, precisa calcular a quantidade de dias entre as datas de aplicação e resgate. Assinale a alternativa que permite obter, a partir de dois objetos Date, data1 e data2, a quantidade de dias entre eles.",
-    options: [
-        "data1 - data2",
-        "data1.Subtract(data2)",
-        "(data1.getDate() - data2.getDate()).Days",
-        "(data1.getTime() - data2.getTime())/(24*3600)",
-        "(data1.getTime() - data2.getTime())/86400000"
-    ],
-    answer: 4,
-    explanation: "A maneira correta de calcular os dias entre duas datas é subtrair os timestamps (em milissegundos) obtidos com getTime() e dividir por 86400000 (quantidade de milissegundos em um dia)."
-},
-{
-    category: "objetos",
-    question: "Utilizando a fórmula de juro composto, qual dos algoritmos abaixo consegue extrair os valores necessários do texto a seguir e calcular o valor final de investimento?\n\"Valor inicial de R$ 1.000,00 aplicado a 0,14% de juro ao dia no dia 25/12/2013 e resgatado no dia 13/10/2018\"",
-    options: [
-        "Algoritmo A (primeiro código apresentado no PDF)",
-        "Algoritmo B (segundo código apresentado no PDF)",
-        "Algoritmo C (terceiro código apresentado no PDF)",
-        "Algoritmo D (quarto código apresentado no PDF)",
-        "Algoritmo E (quinto código apresentado no PDF)"
-    ],
-    answer: 0,
-    explanation: "O algoritmo A é o único que consegue extrair corretamente os valores e calcular o juro composto. Ele usa expressões regulares para capturar os valores e calcula corretamente o período em dias entre as datas."
-}
+    {
+        category: "dart",
+        question: "Qual é a saída do código?\nvoid main() {\n  var a = [1, 2];\n  var b = [...a, 3];\n  print(b);\n}",
+        options: [
+            "[1, 2]",
+            "[1, 2, 3]",
+            "[3, 1, 2]",
+            "Erro"
+        ],
+        answer: 1,
+        explanation: "O operador spread (...) expande os elementos de 'a' e o código adiciona 3 ao final, resultando em [1, 2, 3]."
+    },
+    {
+        category: "dart",
+        question: "Qual método adiciona um item ao final de uma lista?",
+        options: [
+            "list.insert(item)",
+            "list.add(item)",
+            "list.push(item)",
+            "list.append(item)"
+        ],
+        answer: 1,
+        explanation: "Em Dart, o método add() é usado para adicionar um item ao final de uma lista."
+    },
+    {
+        category: "dart",
+        question: "O que extends e implements significam?",
+        options: [
+            "extends herda uma classe, implements implementa uma interface",
+            "Ambos fazem herança múltipla",
+            "implements herda, extends implementa",
+            "São iguais"
+        ],
+        answer: 0,
+        explanation: "extends é usado para herdar de uma classe, enquanto implements é usado para implementar interfaces."
+    },
+    {
+        category: "dart",
+        question: "Qual é o tipo de var x = 1.0;?",
+        options: [
+            "int",
+            "double",
+            "num",
+            "dynamic"
+        ],
+        answer: 1,
+        explanation: "O tipo inferido para var x = 1.0; é double, pois 1.0 é um literal de ponto flutuante."
+    },
+    {
+        category: "dart",
+        question: "Como se lê um arquivo em Dart?",
+        options: [
+            "File('path').readAsString()",
+            "readFile('path')",
+            "File.read('path')",
+            "importFile('path')"
+        ],
+        answer: 0,
+        explanation: "Em Dart, File('path').readAsString() é usado para ler o conteúdo de um arquivo como String."
+    },
+    {
+        category: "dart",
+        question: "Qual é a saída do código?\nvoid main() {\n  String? name;\n  print(name?.length ?? 0);\n}",
+        options: [
+            "null",
+            "Erro",
+            "0",
+            "1"
+        ],
+        answer: 2,
+        explanation: "O código usa o operador de navegação segura ?. e o operador null-coalescing ??, resultando em 0."
+    },
+    {
+        category: "dart",
+        question: "Qual ferramenta compila Dart para JavaScript?",
+        options: [
+            "dart2js",
+            "dartc",
+            "flutter build",
+            "dart-web"
+        ],
+        answer: 0,
+        explanation: "dart2js é a ferramenta que compila código Dart para JavaScript."
+    },
+    {
+        category: "dart",
+        question: "Como se define uma classe em Dart?",
+        options: [
+            "class MyClass {}",
+            "def MyClass {}",
+            "object MyClass {}",
+            "new class MyClass {}"
+        ],
+        answer: 0,
+        explanation: "Em Dart, uma classe é definida usando a sintaxe: class NomeDaClasse {}"
+    },
+    {
+        category: "dart",
+        question: "Qual é a palavra-chave para criar uma instância de uma classe?",
+        options: [
+            "create",
+            "new (opcional no Dart 2+)",
+            "instance",
+            "make"
+        ],
+        answer: 1,
+        explanation: "A palavra-chave 'new' é usada para criar instâncias de classes, mas é opcional no Dart 2+."
+    },
+    {
+        category: "dart",
+        question: "Como declarar um construtor padrão para a classe Pessoa?",
+        options: [
+            "Pessoa() => {}",
+            "Pessoa();",
+            "constructor() {}",
+            "Pessoa.new() {}"
+        ],
+        answer: 1,
+        explanation: "Em Dart, um construtor padrão é declarado usando o nome da classe seguido de parênteses e corpo opcional."
+    },
+    {
+        category: "dart",
+        question: "O que é herança em Dart?",
+        options: [
+            "Uma classe pode herdar propriedades e métodos de outra classe usando extends",
+            "Uma classe pode ter múltiplas superclasses",
+            "Só é possível herdar interfaces",
+            "Herança é feita com a palavra-chave inherit"
+        ],
+        answer: 0,
+        explanation: "Em Dart, herança é o conceito onde uma classe pode herdar propriedades e métodos de outra usando a palavra-chave extends."
+    },
+    {
+        category: "dart",
+        question: "Qual é a saída do código abaixo?\nclass Animal {\n  void emitirSom() => print('Som genérico');\n}\nclass Cachorro extends Animal {\n  void emitirSom() => print('Au au!');\n}\nvoid main() {\n  Animal animal = Cachorro();\n  animal.emitirSom();\n}",
+        options: [
+            "Som genérico",
+            "Au au!",
+            "Erro",
+            "null"
+        ],
+        answer: 1,
+        explanation: "O método emitirSom() é sobrescrito na classe Cachorro, então mesmo que a variável seja do tipo Animal, o método da subclasse é chamado."
+    },
+    {
+        category: "dart",
+        question: "Como declarar um método privado em Dart?",
+        options: [
+            "Usando private antes do método",
+            "Prefixando o nome do método com _",
+            "Usando a palavra-chave hidden",
+            "Métodos não podem ser privados"
+        ],
+        answer: 1,
+        explanation: "Em Dart, métodos privados são declarados prefixando o nome com underscore (_)."
+    },
+    {
+        category: "dart",
+        question: "Como definir um construtor nomeado que inicializa apenas o nome de uma classe Pessoa?\nclass Pessoa {\n  String nome;\n  int idade;\n  // Construtor padrão\n  Pessoa(this.nome, this.idade);\n  // Construtor nomeado aqui\n}",
+        options: [
+            "Pessoa.novo(String n) { nome = n; }",
+            "Pessoa.somenteNome(this.nome);",
+            "named Pessoa(String n) => nome = n;",
+            "Pessoa({this.nome});"
+        ],
+        answer: 1,
+        explanation: "Um construtor nomeado que inicializa apenas o nome seria definido como Pessoa.somenteNome(this.nome);"
+    },
+    {
+        category: "dart",
+        question: "Qual é a diferença entre extends e implements?",
+        options: [
+            "extends herda tudo, implements só métodos",
+            "extends herda atributos e métodos, implements obriga a implementar todos os métodos",
+            "São sinônimos",
+            "implements herda, extends implementa"
+        ],
+        answer: 1,
+        explanation: "extends herda atributos e métodos, enquanto implements obriga a implementar todos os métodos da interface."
+    },
+    {
+        category: "dart",
+        question: "Como definir uma classe abstrata?",
+        options: [
+            "abstract class Veiculo { ... }",
+            "class abstract Veiculo { ... }",
+            "Veiculo with abstract { ... }",
+            "interface Veiculo { ... }"
+        ],
+        answer: 0,
+        explanation: "Uma classe abstrata em Dart é definida usando a palavra-chave 'abstract' antes de 'class'."
+    },
+    {
+        category: "dart",
+        question: "Qual é a saída do código?\nclass Contador {\n  static int count = 0;\n  Contador() { count++; }\n}\nvoid main() {\n  Contador();\n  Contador();\n  print(Contador.count);\n}",
+        options: [
+            "0",
+            "2",
+            "1",
+            "Erro"
+        ],
+        answer: 1,
+        explanation: "O contador estático é incrementado cada vez que um objeto Contador é criado, resultando em 2."
+    },
+    {
+        category: "flutter",
+        question: "Qual widget é usado para criar um botão clicável em Flutter?",
+        options: [
+            "Clickable",
+            "ElevatedButton",
+            "TouchableOpacity",
+            "Button"
+        ],
+        answer: 1,
+        explanation: "ElevatedButton é o widget usado para criar botões clicáveis em Flutter."
+    },
+    {
+        category: "flutter",
+        question: "Qual é a função do widget Scaffold?",
+        options: [
+            "Fornece uma estrutura básica de layout (AppBar, Body, FloatingActionButton, etc.)",
+            "Gerencia estados de widgets",
+            "Navega entre telas",
+            "Cria listas roláveis"
+        ],
+        answer: 0,
+        explanation: "O widget Scaffold fornece uma estrutura básica de layout para aplicativos Flutter."
+    },
+    {
+        category: "flutter",
+        question: "Qual widget é usado para exibir uma lista rolável?",
+        options: [
+            "Column",
+            "ListView",
+            "Stack",
+            "Grid"
+        ],
+        answer: 1,
+        explanation: "ListView é o widget usado para exibir listas roláveis em Flutter."
+    },
+    {
+        category: "flutter",
+        question: "Qual é a diferença entre StatelessWidget e StatefulWidget?",
+        options: [
+            "StatelessWidget é imutável, StatefulWidget pode mudar dinamicamente",
+            "StatelessWidget usa setState(), StatefulWidget não",
+            "StatefulWidget não pode ter filhos",
+            "São idênticos"
+        ],
+        answer: 0,
+        explanation: "StatelessWidget é imutável, enquanto StatefulWidget pode mudar seu estado dinamicamente."
+    },
+    {
+        category: "flutter",
+        question: "Como navegar para uma nova tela (Tela2) em Flutter?",
+        options: [
+            "Navigator.push(context, MaterialPageRoute(builder: (context) => Tela2()));",
+            "Navigator.goTo(Tela2());",
+            "context.changeScreen(Tela2());",
+            "Route.switch(Tela2());"
+        ],
+        answer: 0,
+        explanation: "A navegação em Flutter é feita usando Navigator.push com um MaterialPageRoute."
+    },
+    {
+        category: "flutter",
+        question: "Qual widget é usado para centralizar um filho horizontal e verticalmente?",
+        options: [
+            "Align",
+            "Center",
+            "Padding",
+            "Container"
+        ],
+        answer: 1,
+        explanation: "O widget Center é usado para centralizar um widget filho tanto horizontal quanto verticalmente."
+    },
+    {
+        category: "flutter",
+        question: "Qual método é chamado quando um StatefulWidget é inicializado?",
+        options: [
+            "onCreate()",
+            "initState()",
+            "build()",
+            "start()"
+        ],
+        answer: 1,
+        explanation: "O método initState() é chamado quando um StatefulWidget é inicializado."
+    },
+    {
+        category: "flutter",
+        question: "Qual widget permite adicionar espaçamento interno ao redor de outro widget?",
+        options: [
+            "Margin",
+            "Padding",
+            "Spacer",
+            "Space"
+        ],
+        answer: 1,
+        explanation: "O widget Padding é usado para adicionar espaçamento interno ao redor de outro widget."
+    },
+    {
+        category: "flutter",
+        question: "Como retornar à tela anterior na navegação?",
+        options: [
+            "Navigator.back();",
+            "Navigator.pop(context);",
+            "context.goBack();",
+            "Route.pop();"
+        ],
+        answer: 1,
+        explanation: "Para retornar à tela anterior, usa-se Navigator.pop(context)."
+    },
+    {
+        category: "flutter",
+        question: "Qual widget é usado para organizar widgets verticalmente?",
+        options: [
+            "Column",
+            "Row",
+            "List",
+            "VerticalLayout"
+        ],
+        answer: 0,
+        explanation: "O widget Column é usado para organizar widgets verticalmente em Flutter."
+    },
+    {
+        category: "flutter",
+        question: "O que o método setState() faz em um StatefulWidget?",
+        options: [
+            "Atualiza o estado interno e força o rebuild do widget",
+            "Remove o widget da árvore",
+            "Navega para outra tela",
+            "Inicializa o estado"
+        ],
+        answer: 0,
+        explanation: "O método setState() atualiza o estado interno e notifica o framework para reconstruir o widget."
+    },
+    {
+        category: "flutter",
+        question: "Qual widget é usado para exibir texto em Flutter?",
+        options: [
+            "Label",
+            "Text",
+            "StringView",
+            "TextView"
+        ],
+        answer: 1,
+        explanation: "O widget Text é usado para exibir texto em Flutter."
+    },
+    {
+        category: "flutter",
+        question: "Como adicionar margens a um widget?",
+        options: [
+            "Usar Container com margin",
+            "Usar Padding com edgeInsets",
+            "Usar Spacer",
+            "Não é possível"
+        ],
+        answer: 0,
+        explanation: "Para adicionar margens a um widget, usa-se Container com a propriedade margin."
+    },
+    {
+        category: "flutter",
+        question: "Qual widget permite sobrepor widgets uns sobre os outros?",
+        options: [
+            "Stack",
+            "Column",
+            "Overlay",
+            "Layer"
+        ],
+        answer: 0,
+        explanation: "O widget Stack permite posicionar widgets uns sobre os outros."
+    },
+    {
+        category: "flutter",
+        question: "Qual é o widget raiz obrigatório em um app Flutter?",
+        options: [
+            "MaterialApp ou CupertinoApp",
+            "Scaffold",
+            "AppBar",
+            "MainWidget"
+        ],
+        answer: 0,
+        explanation: "MaterialApp ou CupertinoApp são os widgets raiz obrigatórios em um aplicativo Flutter."
+    },
+    {
+        category: "flutter",
+        question: "Como definir um ícone no AppBar?",
+        options: [
+            "AppBar(leading: Icon(Icons.menu));",
+            "AppBar(icon: Icons.menu);",
+            "AppBar(child: Icon(Icons.menu));",
+            "AppBar(action: Icon(Icons.menu));"
+        ],
+        answer: 0,
+        explanation: "Para definir um ícone no AppBar, usa-se a propriedade leading: AppBar(leading: Icon(Icons.menu))."
+    },
+    {
+        category: "flutter",
+        question: "Qual widget é usado para criar um campo de texto editável?",
+        options: [
+            "TextField",
+            "TextInput",
+            "EditText",
+            "Input"
+        ],
+        answer: 0,
+        explanation: "O widget TextField é usado para criar campos de texto editáveis em Flutter."
+    },
+    {
+        category: "flutter",
+        question: "O que o widget SizedBox faz?",
+        options: [
+            "Define um tamanho fixo para seu filho ou espaçamento",
+            "Cria uma caixa de texto",
+            "Gerencia estados",
+            "Navega entre telas"
+        ],
+        answer: 0,
+        explanation: "O widget SizedBox define um tamanho fixo para seu filho ou cria um espaçamento."
+    },
+    {
+        category: "flutter",
+        question: "Qual widget é usado para criar um switch (interruptor)?",
+        options: [
+            "Switch",
+            "Toggle",
+            "Checkbox",
+            "Button"
+        ],
+        answer: 0,
+        explanation: "O widget Switch é usado para criar um interruptor em Flutter."
+    },
+    {
+        category: "flutter",
+        question: "Qual é a função do BuildContext?",
+        options: [
+            "Representa a localização de um widget na árvore de widgets",
+            "Gerencia estados globais",
+            "Armazena dados persistentes",
+            "Navega entre telas"
+        ],
+        answer: 0,
+        explanation: "BuildContext representa a localização de um widget na árvore de widgets."
+    }
 ];
-
 
         let currentQuestionIndex = 0;
         let score = 0;
